@@ -18,7 +18,7 @@ namespace MOH.Common.Data.Entities
         [MaxLength(50)]
         public string LastName { get; set; }
 
-
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
 
         [MaxLength(20)]
@@ -28,7 +28,6 @@ namespace MOH.Common.Data.Entities
 
 
 
-        public int Age { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime? RemoveDate { get; set; }
     }
@@ -36,10 +35,19 @@ namespace MOH.Common.Data.Entities
 
     public enum Profession
     {
+        [Display(Name = "სტუდენტი")]
         Student,
+
+        [Display(Name = "დეველოპერი")]
         Developer,
+
+        [Display(Name = "მშენებელი")]
         Builder,
+
+        [Display(Name = "ეკონომისტი")]
         Economist,
+
+        [Display(Name = "ადვოკატი")]
         Lawyer
     }
 

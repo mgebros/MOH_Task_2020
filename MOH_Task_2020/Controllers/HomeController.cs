@@ -12,7 +12,9 @@ namespace MOH_Task_2020.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Create", "People");
+
+            //return View();
         }
 
         public IActionResult Privacy()

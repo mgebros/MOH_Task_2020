@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MOH.Common.Data;
+using MOH.Common.IServices;
+using MOH.Common.Services;
 
 namespace MOH_Task_2020
 {
@@ -35,7 +37,7 @@ namespace MOH_Task_2020
 
 
             services.AddDbContext<MOHContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString")));
-
+            services.AddScoped<IPeopleService, PeopleService>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
