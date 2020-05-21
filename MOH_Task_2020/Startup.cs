@@ -65,7 +65,7 @@ namespace MOH_Task_2020
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=People}/{action=Index}/{id?}");
             });
         }
     }

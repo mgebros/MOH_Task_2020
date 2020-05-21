@@ -15,14 +15,16 @@ namespace MOH_Task_2020.Controllers
 {
     public class PeopleController : Controller
     {
-        //private readonly MOHContext _context;
         private readonly IPeopleService _ps;
 
-        //public PeopleController(MOHContext context)
+
+
         public PeopleController(IPeopleService ps)
         {
             _ps = ps;
         }
+
+
 
         //GET: People
         public async Task<IActionResult> Index()
@@ -30,23 +32,7 @@ namespace MOH_Task_2020.Controllers
             return View(_ps.GetActivePeople());
         }
 
-        // GET: People/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var person = await _context.People
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(person);
-        //}
+        
 
         // GET: People/Create
         public IActionResult Create()
@@ -54,9 +40,9 @@ namespace MOH_Task_2020.Controllers
             return View();
         }
 
+
+
         // POST: People/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PrivateNo,FirstName,LastName,BirthDate,Phone,Profession")] PersonModel person)
@@ -75,32 +61,27 @@ namespace MOH_Task_2020.Controllers
         //GET: People/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return View("GeneralError", new GeneralErrorViewModel("მიუთიტეთ იდენტიფიკატორი"));
-            }
+            if (id == null) return View("GeneralError", new GeneralErrorViewModel("მიუთიტეთ იდენტიფიკატორი")); 
 
             var person = _ps.GetPerson((int)id);
 
-            if (person == null)
-            {
-                return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
-            }
+            if (person == null) return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
+            
+
 
             return View(person);
         }
 
+
+
         // POST: People/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,PrivateNo,FirstName,LastName,BirthDate,Phone,Profession")] PersonModel person)
         {
-            if (id != person.ID)
-            {
-                return View("GeneralError", new GeneralErrorViewModel("არასწორი იდენტიფიკატორი"));
-            }
+            if (id != person.ID) return View("GeneralError", new GeneralErrorViewModel("არასწორი იდენტიფიკატორი"));
+            
+
 
             if (ModelState.IsValid)
             {
@@ -111,34 +92,27 @@ namespace MOH_Task_2020.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!_ps.PersonExists(person.ID))
-                    {
                         return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+
             return View(person);
         }
 
         // GET: People/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return View("GeneralError", new GeneralErrorViewModel("მიუთითეთ იდენტიფიკატორი"));
-            }
-
-           
+            if (id == null) return View("GeneralError", new GeneralErrorViewModel("მიუთითეთ იდენტიფიკატორი"));
+            
             var person = _ps.GetPerson((int)id);
 
-            if (person == null)
-            {
-                return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
-            }
+            if (person == null) return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
+           
+
 
             return View(person);
         }
