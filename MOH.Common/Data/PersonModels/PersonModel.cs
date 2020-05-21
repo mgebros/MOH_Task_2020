@@ -46,5 +46,8 @@ namespace MOH.Common.Data.PersonModels
 
         [DisplayName("გაუქმების თარიღი")]
         public DateTime? RemoveDate { get; set; }
+
+        [DisplayName("ასაკი")]
+        public int Age { get; set; }
     }
 }

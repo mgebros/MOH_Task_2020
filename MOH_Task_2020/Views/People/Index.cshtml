@@ -1,13 +1,13 @@
-﻿@model IEnumerable<MOH.Common.Data.Entities.Person>
+﻿@model IEnumerable<MOH.Common.Data.PersonModels.PersonModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ნუსხა";
 }
 
-<h1>Index</h1>
+<h1>ნუსხა</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">რეგისტრაცია</a>
 </p>
 <table class="table">
     <thead>
@@ -22,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.Age)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
@@ -36,6 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.RemoveDate)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -52,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
+                @Html.DisplayFor(modelItem => item.Age)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
@@ -66,10 +67,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.RemoveDate)
             </td>
+            
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ID">რედაქტირება</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">დეტალები</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">გაუქმება</a>
             </td>
         </tr>
 }

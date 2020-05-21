@@ -9,7 +9,7 @@ namespace MOH.Common.Data.Entities
     {
         public int ID { get; set; }
 
-        [MaxLength(9)]
+        [MaxLength(11)]
         public string PrivateNo { get; set; }
 
         [MaxLength(50)]

@@ -9,6 +9,7 @@ using MOH.Common.Data;
 using MOH.Common.Data.Entities;
 using MOH.Common.Data.PersonModels;
 using MOH.Common.IServices;
+using MOH_Task_2020.Models;
 
 namespace MOH_Task_2020.Controllers
 {
@@ -26,8 +27,7 @@ namespace MOH_Task_2020.Controllers
         //GET: People
         public async Task<IActionResult> Index()
         {
-            //return View(await _context.People.ToListAsync());
-            return View();
+            return View(_ps.GetActivePeople());
         }
 
         // GET: People/Details/5
@@ -70,56 +70,59 @@ namespace MOH_Task_2020.Controllers
             return View(person);
         }
 
-        // GET: People/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var person = await _context.People.FindAsync(id);
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(person);
-        //}
+
+        //GET: People/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return View("GeneralError", new GeneralErrorViewModel("მიუთიტეთ იდენტიფიკატორი"));
+            }
+
+            var person = _ps.GetPerson((int)id);
+
+            if (person == null)
+            {
+                return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
+            }
+
+            return View(person);
+        }
 
         // POST: People/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,PrivateNo,FirstName,LastName,BirthDate,Phone,Profession,RegistrationDate,RemoveDate")] Person person)
-        //{
-        //    if (id != person.ID)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,PrivateNo,FirstName,LastName,BirthDate,Phone,Profession")] PersonModel person)
+        {
+            if (id != person.ID)
+            {
+                return View("GeneralError", new GeneralErrorViewModel("არასწორი იდენტიფიკატორი"));
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(person);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!PersonExists(person.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(person);
-        //}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _ps.Edit(person);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_ps.PersonExists(person.ID))
+                    {
+                        return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(person);
+        }
 
         // GET: People/Delete/5
         //public async Task<IActionResult> Delete(int? id)
@@ -150,9 +153,6 @@ namespace MOH_Task_2020.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool PersonExists(int id)
-        //{
-        //    return _context.People.Any(e => e.ID == id);
-        //}
+       
     }
 }
