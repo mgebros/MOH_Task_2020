@@ -14,5 +14,6 @@ namespace MOH.Common.IServices
         PersonModel GetPerson(int id);
         bool PersonExists(int id);
         void Edit(PersonModel person);
+        void Remove(int id);
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MOH.Common.Migrations
+namespace MOH_Task_2020.Migrations
 {
     public partial class person : Migration
     {

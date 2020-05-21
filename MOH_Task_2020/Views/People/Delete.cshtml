@@ -1,14 +1,14 @@
-﻿@model MOH.Common.Data.Entities.Person
+﻿@model MOH.Common.Data.PersonModels.PersonModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "გაუქმება";
 }
 
-<h1>Delete</h1>
+    <h1>გაუქმება</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>დარწმუნებული ხართ?</h3>
 <div>
-    <h4>Person</h4>
+    <h4>პიროვნება</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -53,17 +53,11 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.RegistrationDate)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RemoveDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RemoveDate)
-        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="დადასტურება" class="btn btn-danger" /> |
+        <a asp-action="Index">დაბრუნება</a>
     </form>
 </div>

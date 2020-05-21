@@ -36,7 +36,7 @@ namespace MOH_Task_2020
             });
 
 
-            services.AddDbContext<MOHContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString")));
+            services.AddDbContext<MOHContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString"), b => b.MigrationsAssembly("MOH_Task_2020")));
             services.AddScoped<IPeopleService, PeopleService>();
 
 

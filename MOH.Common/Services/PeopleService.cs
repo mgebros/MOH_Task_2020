@@ -35,7 +35,8 @@ namespace MOH.Common.Services
                 Phone = pm.Phone,
                 PrivateNo = pm.PrivateNo,
                 Profession = pm.Profession,
-                RegistrationDate = DateTime.Now
+                RegistrationDate = DateTime.Now,
+                IsActive = true
             };
 
             _context.Add(p);
@@ -60,7 +61,8 @@ namespace MOH.Common.Services
                 Profession = pm.Profession,
                 RegistrationDate = pm.RegistrationDate,
                 RemoveDate = pm.RemoveDate,
-                Age = (DateTime.Now - pm.BirthDate).Days / 365
+                Age = (DateTime.Now - pm.BirthDate).Days / 365,
+                IsActive = pm.IsActive
             }));
 
             return pms;
@@ -88,7 +90,8 @@ namespace MOH.Common.Services
                 Profession = person.Profession,
                 RegistrationDate = person.RegistrationDate,
                 RemoveDate = person.RemoveDate,
-                Age = (DateTime.Now - person.BirthDate).Days / 365
+                Age = (DateTime.Now - person.BirthDate).Days / 365,
+                IsActive = person.IsActive
             };
 
             return pm;
@@ -106,6 +109,20 @@ namespace MOH.Common.Services
             p.Phone = person.Phone;
             p.PrivateNo = person.PrivateNo;
             p.Profession = person.Profession;
+            p.IsActive = true;
+
+            _context.Update(p);
+            _context.SaveChanges();
+        }
+
+
+
+        public void Remove(int id)
+        {
+            var p = _context.People.FirstOrDefault(pp => pp.ID == id);
+
+            p.IsActive = false;
+            p.RemoveDate = DateTime.Now;
 
             _context.Update(p);
             _context.SaveChanges();

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace MOH.Common.Migrations
+namespace MOH_Task_2020.Migrations
 {
     [DbContext(typeof(MOHContext))]
-    [Migration("20200519220822_person")]
-    partial class person
+    [Migration("20200521151044_isactive2")]
+    partial class isactive2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,8 @@ namespace MOH.Common.Migrations
                     b.Property<string>("FirstName")
                         .HasMaxLength(50);
 
+                    b.Property<bool>("IsActive");
+
                     b.Property<string>("LastName")
                         .HasMaxLength(50);
 
@@ -39,7 +41,7 @@ namespace MOH.Common.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("PrivateNo")
-                        .HasMaxLength(9);
+                        .HasMaxLength(11);
 
                     b.Property<int>("Profession");
 

@@ -125,34 +125,35 @@ namespace MOH_Task_2020.Controllers
         }
 
         // GET: People/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return View("GeneralError", new GeneralErrorViewModel("მიუთითეთ იდენტიფიკატორი"));
+            }
 
-        //    var person = await _context.People
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (person == null)
-        //    {
-        //        return NotFound();
-        //    }
+           
+            var person = _ps.GetPerson((int)id);
 
-        //    return View(person);
-        //}
+            if (person == null)
+            {
+                return View("GeneralError", new GeneralErrorViewModel("პიროვნება ვერ მოიძებნა"));
+            }
 
-        // POST: People/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var person = await _context.People.FindAsync(id);
-        //    _context.People.Remove(person);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return View(person);
+        }
 
-       
+
+
+        //POST: People/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            _ps.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

@@ -4,14 +4,16 @@ using MOH.Common.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace MOH.Common.Migrations
+namespace MOH_Task_2020.Migrations
 {
     [DbContext(typeof(MOHContext))]
-    partial class MOHContextModelSnapshot : ModelSnapshot
+    [Migration("20200521150852_isactive")]
+    partial class isactive
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,7 +39,7 @@ namespace MOH.Common.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("PrivateNo")
-                        .HasMaxLength(9);
+                        .HasMaxLength(11);
 
                     b.Property<int>("Profession");
 

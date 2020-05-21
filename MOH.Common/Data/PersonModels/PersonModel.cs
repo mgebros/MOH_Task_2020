@@ -13,7 +13,7 @@ namespace MOH.Common.Data.PersonModels
 
         [Required(ErrorMessage = "გთხოვთ მიუთითოთ პირადობა")]
         [DisplayName("პირადობა")]
-        [MaxLength(9)]
+        [MaxLength(11)]
         public string PrivateNo { get; set; }
 
         [Required(ErrorMessage = "გთხოვთ მიუთითოთ სახელი")]
@@ -46,6 +46,9 @@ namespace MOH.Common.Data.PersonModels
 
         [DisplayName("გაუქმების თარიღი")]
         public DateTime? RemoveDate { get; set; }
+
+        [DisplayName("აქტიურია")]
+        public bool IsActive { get; set; }
 
         [DisplayName("ასაკი")]
         public int Age { get; set; }

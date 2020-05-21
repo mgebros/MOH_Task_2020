@@ -30,6 +30,7 @@ namespace MOH.Common.Data.Entities
 
         public DateTime RegistrationDate { get; set; }
         public DateTime? RemoveDate { get; set; }
+        public bool IsActive { get; set; }
     }
 
 

@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">რეგისტრაცია</a>
 </p>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -42,7 +42,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr @if (!item.IsActive) { <text>class="text-danger"</text> }>
             <td>
                 @Html.DisplayFor(modelItem => item.PrivateNo)
             </td>
@@ -69,9 +69,13 @@
             </td>
             
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">რედაქტირება</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">დეტალები</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">გაუქმება</a>
+                @if (item.IsActive)
+                {
+                    <text>
+                    <a asp-action="Edit" asp-route-id="@item.ID">რედაქტირება</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">გაუქმება</a>
+                    </text>
+                }
             </td>
         </tr>
 }
