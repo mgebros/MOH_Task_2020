@@ -36,6 +36,9 @@ namespace MOH.Common.Data.Entities
 
     public enum Profession
     {
+        [Display(Name = "ცარიელი")]
+        None,
+
         [Display(Name = "სტუდენტი")]
         Student,
 

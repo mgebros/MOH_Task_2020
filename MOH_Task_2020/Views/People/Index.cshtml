@@ -9,6 +9,9 @@
 <p>
     <a asp-action="Create">რეგისტრაცია</a>
 </p>
+
+@await Html.PartialAsync("SearchPartial", new MOH.Common.Data.PersonModels.SearchPersonModel())
+
 <table class="table table-striped">
     <thead>
         <tr>
@@ -41,43 +44,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr @if (!item.IsActive) { <text>class="text-danger"</text> }>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrivateNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Profession)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RemoveDate)
-            </td>
-            
-            <td>
-                @if (item.IsActive)
-                {
-                    <text>
-                    <a asp-action="Edit" asp-route-id="@item.ID">რედაქტირება</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">გაუქმება</a>
-                    </text>
-                }
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr @if (!item.IsActive) { <text> class="text-danger" </text> }>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrivateNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Profession)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RemoveDate)
+                </td>
+
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <text>
+                            <a asp-action="Edit" asp-route-id="@item.ID">რედაქტირება</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">გაუქმება</a>
+                        </text>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

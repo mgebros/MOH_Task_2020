@@ -46,9 +46,24 @@ namespace MOH.Common.Services
 
 
 
-        public IEnumerable<PersonModel> GetActivePeople()
+        public IEnumerable<PersonModel> GetPeople(SearchPersonModel spm)
         {
-            var people = _context.People.ToList();
+            var filter = _context.People.Where(p => p != null);
+
+            if(!string.IsNullOrEmpty(spm.PrivateNo)) filter = filter.Where(p => p.PrivateNo == spm.PrivateNo); 
+            if(!string.IsNullOrEmpty(spm.FirstName)) filter = filter.Where(p => p.FirstName == spm.FirstName); 
+            if(!string.IsNullOrEmpty(spm.LastName)) filter = filter.Where(p => p.LastName == spm.LastName); 
+
+            if(spm.AgeMin != null) filter = filter.Where(p => (DateTime.Now - p.BirthDate).Days / 365 >= spm.AgeMin); 
+            if(spm.AgeMax != null) filter = filter.Where(p => (DateTime.Now - p.BirthDate).Days / 365 <= spm.AgeMax); 
+
+            if(spm.RegDateFrom != null) filter = filter.Where(p => p.RegistrationDate > spm.RegDateFrom); 
+            if(spm.RegDateTo != null) filter = filter.Where(p => p.RegistrationDate < spm.RegDateTo); 
+
+            if(spm.RemoveDateFrom != null) filter = filter.Where(p => p.RemoveDate > spm.RemoveDateFrom); 
+            if(spm.RemoveDateTo != null) filter = filter.Where(p => p.RemoveDate < spm.RemoveDateTo);
+
+            var people = filter.ToList();
 
             List<PersonModel> pms = new List<PersonModel>(people.Select(pm => new PersonModel()
             {

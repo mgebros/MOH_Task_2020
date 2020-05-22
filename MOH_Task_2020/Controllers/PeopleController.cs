@@ -27,9 +27,9 @@ namespace MOH_Task_2020.Controllers
 
 
         //GET: People
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SearchPersonModel spm)
         {
-            return View(_ps.GetActivePeople());
+            return View(_ps.GetPeople(spm));
         }
 
         

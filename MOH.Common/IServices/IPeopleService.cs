@@ -10,7 +10,7 @@ namespace MOH.Common.IServices
     public interface IPeopleService
     {
         Task Create(PersonModel pm);
-        IEnumerable<PersonModel> GetActivePeople();
+        IEnumerable<PersonModel> GetPeople(SearchPersonModel spm);
         PersonModel GetPerson(int id);
         bool PersonExists(int id);
         void Edit(PersonModel person);
