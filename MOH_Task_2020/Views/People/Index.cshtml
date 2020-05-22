@@ -12,6 +12,8 @@
 
 @await Html.PartialAsync("SearchPartial", new MOH.Common.Data.PersonModels.SearchPersonModel())
 
+ნაპოვნი ჩანაწერები: <b>@Model.Count()</b>
+
 <table class="table table-striped">
     <thead>
         <tr>

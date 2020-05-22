@@ -1,59 +1,59 @@
 ﻿@model MOH.Common.Data.PersonModels.SearchPersonModel
 
-    <div class="container-fluid">
-        <form asp-action="Index" method="get">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="control-label"></label>
-                        <input asp-for="FirstName" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="LastName" class="control-label"></label>
-                        <input asp-for="LastName" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="AgeMin" class="control-label"></label>
-                        <input asp-for="AgeMin" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="AgeMax" class="control-label"></label>
-                        <input asp-for="AgeMax" class="form-control" />
-                    </div>
+    <form asp-action="Index" method="get">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="RegDateFrom" class="control-label"></label>
-                        <input asp-for="RegDateFrom" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="RegDateTo" class="control-label"></label>
-                        <input asp-for="RegDateTo" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="RemoveDateFrom" class="control-label"></label>
-                        <input asp-for="RemoveDateFrom" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label asp-for="RemoveDateTo" class="control-label"></label>
-                        <input asp-for="RemoveDateTo" class="form-control" />
-                    </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="AgeMin" class="control-label"></label>
+                    <input asp-for="AgeMin" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="AgeMax" class="control-label"></label>
+                    <input asp-for="AgeMax" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="RegDateFrom" class="control-label"></label>
+                    <input asp-for="RegDateFrom" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="RegDateTo" class="control-label"></label>
+                    <input asp-for="RegDateTo" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="RemoveDateFrom" class="control-label"></label>
+                    <input asp-for="RemoveDateFrom" class="form-control" />
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label asp-for="RemoveDateTo" class="control-label"></label>
+                    <input asp-for="RemoveDateTo" class="form-control" />
+                </div>                
+            </div>
+        </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -67,18 +67,22 @@
                         <input asp-for="Phone" class="form-control" />
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3 float-md-right">
                     <div class="form-group">
                         <label asp-for="Profession" class="control-label"></label>
-                        <select asp-for="Profession" class="form-control" asp-items="@Html.GetEnumSelectList<MOH.Common.Data.Entities.Profession>()" />
+                        <select asp-for="Profession" class="form-control" asp-items="Html.GetEnumSelectList<MOH.Common.Data.Entities.Profession>()" ></select>
                     </div>
-                </div>
-                <div class="col-md-2">
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
                     <div class="form-group">
-                        <input type="button" class="btn btn-primary" value="ძებნა" />
+                        <label class="control-label">&nbsp;</label>
+                        <input type="submit" class="btn btn-primary" value="ძებნა" />
                         <input type="reset" class="btn btn-danger" value="გაუქმება" />
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
+    </form>
+    <br />
