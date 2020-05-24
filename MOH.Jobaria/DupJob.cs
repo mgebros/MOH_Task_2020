@@ -17,7 +17,7 @@ namespace MOH.Jobaria
             {
                 //_ps.RemoveDuplicates();
                 ServiceProvider sc;
-                sc.GetService<IPeopleService>();
+                //sc.GetService<IPeopleService>();
                 Console.WriteLine("Duplicates removed successfully!");
             }
             catch (Exception ex)

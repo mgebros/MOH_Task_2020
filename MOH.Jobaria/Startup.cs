@@ -82,7 +82,7 @@ namespace MOH.Jobaria
                 {
                     _isRunning = true;
 
-                    _connDi = new ConnectiorDI();
+                    //_connDi = new ConnectiorDI();
                     _scheduler = new Scheduler();
                     await _scheduler.RunScheduler();
                 }
