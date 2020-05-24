@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using MOH.Common.Data;
 using MOH.Common.Data.Entities;
 using MOH.Common.Data.PersonModels;
@@ -48,22 +49,25 @@ namespace MOH.Common.Services
 
         public IEnumerable<PersonModel> GetPeople(SearchPersonModel spm)
         {
-            var filter = _context.People.Where(p => p != null);
+            var people = _context.People.Where(p =>
+            string.IsNullOrEmpty(spm.PrivateNo) || p.PrivateNo == spm.PrivateNo &&
+            string.IsNullOrEmpty(spm.FirstName) || p.FirstName == spm.FirstName &&
+            string.IsNullOrEmpty(spm.LastName) || p.LastName == spm.LastName &&
+            string.IsNullOrEmpty(spm.Phone) || p.Phone == spm.Phone &&
 
-            if(!string.IsNullOrEmpty(spm.PrivateNo)) filter = filter.Where(p => p.PrivateNo == spm.PrivateNo); 
-            if(!string.IsNullOrEmpty(spm.FirstName)) filter = filter.Where(p => p.FirstName == spm.FirstName); 
-            if(!string.IsNullOrEmpty(spm.LastName)) filter = filter.Where(p => p.LastName == spm.LastName); 
+            !spm.Profession.HasValue || p.Profession == spm.Profession &&
 
-            if(spm.AgeMin != null) filter = filter.Where(p => (DateTime.Now - p.BirthDate).Days / 365 >= spm.AgeMin); 
-            if(spm.AgeMax != null) filter = filter.Where(p => (DateTime.Now - p.BirthDate).Days / 365 <= spm.AgeMax); 
+            !spm.AgeMin.HasValue || (DateTime.Now - p.BirthDate).Days / 365 >= spm.AgeMin &&
+            !spm.AgeMax.HasValue || (DateTime.Now - p.BirthDate).Days / 365 <= spm.AgeMax &&
 
-            if(spm.RegDateFrom != null) filter = filter.Where(p => p.RegistrationDate > spm.RegDateFrom); 
-            if(spm.RegDateTo != null) filter = filter.Where(p => p.RegistrationDate < spm.RegDateTo); 
+            !spm.RegDateFrom.HasValue || p.RegistrationDate > spm.RegDateFrom &&
+            !spm.RegDateTo.HasValue || p.RegistrationDate < spm.RegDateTo &&
 
-            if(spm.RemoveDateFrom != null) filter = filter.Where(p => p.RemoveDate > spm.RemoveDateFrom); 
-            if(spm.RemoveDateTo != null) filter = filter.Where(p => p.RemoveDate < spm.RemoveDateTo);
+            !spm.RemoveDateFrom.HasValue || p.RemoveDate > spm.RemoveDateFrom &&
+            !spm.RemoveDateTo.HasValue || p.RemoveDate < spm.RemoveDateTo
+            ).ToList();
 
-            var people = filter.ToList();
+
 
             List<PersonModel> pms = new List<PersonModel>(people.Select(pm => new PersonModel()
             {
@@ -132,7 +136,7 @@ namespace MOH.Common.Services
 
 
 
-        public void Remove(int id)
+        public void Deactivate(int id)
         {
             var p = _context.People.FirstOrDefault(pp => pp.ID == id);
 
@@ -150,5 +154,47 @@ namespace MOH.Common.Services
         {
             return _context.People.Any(e => e.ID == id);
         }
+
+
+
+        public void RemoveDuplicates()
+        {
+            //  SQl except Age checkign
+            /*
+select PrivateNo from (
+select COUNT(PrivateNo) as Quantity, PrivateNo from People
+Where IsActive = 1
+Group By PrivateNo) as cxrili
+Where Quantity > 1
+*/
+            //  Taking similar Private Numbers
+            var privateNos = _context.People
+                .Where(p => p.IsActive == true && ((DateTime.Now - p.BirthDate).Days / 365) > 30)
+                .GroupBy(p => p.PrivateNo)
+                .Select(p => new { PrivateNo = p.Key, Quantity = p.Count() })
+                .Where(p => p.Quantity > 1)
+                .Select(p => p.PrivateNo);
+
+
+
+            //  Taking every second and consequent ID by PrivateNos 
+            List<int> ids = new List<int>();
+            foreach(var no in privateNos)
+            {
+                ids.AddRange(
+                    _context.People
+                    .Where(p => p.PrivateNo == no && p.IsActive == true && ((DateTime.Now - p.BirthDate).Days / 365) > 30)
+                    .Skip(1)
+                    .Select(p => p.ID)
+                    .ToList()
+                    );
+            }
+
+            foreach(var id in ids)
+                Deactivate(id);
+
+            
+        }
+
     }
 }

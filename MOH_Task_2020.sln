@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOH_Task_2020", "MOH_Task_2020\MOH_Task_2020.csproj", "{D53A2485-F561-4E92-A777-F87FB432F044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOH_Task_2020", "MOH_Task_2020\MOH_Task_2020.csproj", "{D53A2485-F561-4E92-A777-F87FB432F044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOH.Common", "MOH.Common\MOH.Common.csproj", "{CF6958C9-9255-41A7-9DEA-C69E352DC211}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOH.Common", "MOH.Common\MOH.Common.csproj", "{CF6958C9-9255-41A7-9DEA-C69E352DC211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOH.Jobaria", "MOH.Jobaria\MOH.Jobaria.csproj", "{60662501-4F03-4075-81BE-77B3383DE7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CF6958C9-9255-41A7-9DEA-C69E352DC211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF6958C9-9255-41A7-9DEA-C69E352DC211}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF6958C9-9255-41A7-9DEA-C69E352DC211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60662501-4F03-4075-81BE-77B3383DE7D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60662501-4F03-4075-81BE-77B3383DE7D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60662501-4F03-4075-81BE-77B3383DE7D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60662501-4F03-4075-81BE-77B3383DE7D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

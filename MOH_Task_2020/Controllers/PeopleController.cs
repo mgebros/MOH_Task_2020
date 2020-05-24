@@ -124,7 +124,18 @@ namespace MOH_Task_2020.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            _ps.Remove(id);
+            _ps.Deactivate(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+
+        //POST: People/DeactivateAll
+        [HttpPost, ActionName("DeactivateAll")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeactivateAll()
+        {
+            _ps.RemoveDuplicates();
             return RedirectToAction(nameof(Index));
         }
 
