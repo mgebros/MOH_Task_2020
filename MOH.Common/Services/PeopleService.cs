@@ -50,21 +50,21 @@ namespace MOH.Common.Services
         public IEnumerable<PersonModel> GetPeople(SearchPersonModel spm)
         {
             var people = _context.People.Where(p =>
-            string.IsNullOrEmpty(spm.PrivateNo) || p.PrivateNo == spm.PrivateNo &&
-            string.IsNullOrEmpty(spm.FirstName) || p.FirstName == spm.FirstName &&
-            string.IsNullOrEmpty(spm.LastName) || p.LastName == spm.LastName &&
-            string.IsNullOrEmpty(spm.Phone) || p.Phone == spm.Phone &&
+            (string.IsNullOrEmpty(spm.PrivateNo) || p.PrivateNo == spm.PrivateNo) &&
+            (string.IsNullOrEmpty(spm.FirstName) || p.FirstName == spm.FirstName) &&
+            (string.IsNullOrEmpty(spm.LastName) || p.LastName == spm.LastName) &&
+            (string.IsNullOrEmpty(spm.Phone) || p.Phone == spm.Phone) &&
 
-            !spm.Profession.HasValue || p.Profession == spm.Profession &&
+            (spm.Profession == Profession.None ||  p.Profession == spm.Profession) &&
 
-            !spm.AgeMin.HasValue || (DateTime.Now - p.BirthDate).Days / 365 >= spm.AgeMin &&
-            !spm.AgeMax.HasValue || (DateTime.Now - p.BirthDate).Days / 365 <= spm.AgeMax &&
+            (!spm.AgeMin.HasValue || (DateTime.Now - p.BirthDate).Days / 365 >= spm.AgeMin) &&
+            (!spm.AgeMax.HasValue || (DateTime.Now - p.BirthDate).Days / 365 <= spm.AgeMax) &&
 
-            !spm.RegDateFrom.HasValue || p.RegistrationDate > spm.RegDateFrom &&
-            !spm.RegDateTo.HasValue || p.RegistrationDate < spm.RegDateTo &&
+            (!spm.RegDateFrom.HasValue || p.RegistrationDate > spm.RegDateFrom) &&
+            (!spm.RegDateTo.HasValue || p.RegistrationDate < spm.RegDateTo) &&
 
-            !spm.RemoveDateFrom.HasValue || p.RemoveDate > spm.RemoveDateFrom &&
-            !spm.RemoveDateTo.HasValue || p.RemoveDate < spm.RemoveDateTo
+            (!spm.RemoveDateFrom.HasValue || p.RemoveDate > spm.RemoveDateFrom) &&
+            (!spm.RemoveDateTo.HasValue || p.RemoveDate < spm.RemoveDateTo)
             ).ToList();
 
 
