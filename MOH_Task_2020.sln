@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOH_Task_2020", "MOH_Task_2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOH.Common", "MOH.Common\MOH.Common.csproj", "{CF6958C9-9255-41A7-9DEA-C69E352DC211}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOH.Jobaria", "MOH.Jobaria\MOH.Jobaria.csproj", "{60662501-4F03-4075-81BE-77B3383DE7D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MOH.Jobaria", "MOH.Jobaria\MOH.Jobaria.csproj", "{60662501-4F03-4075-81BE-77B3383DE7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

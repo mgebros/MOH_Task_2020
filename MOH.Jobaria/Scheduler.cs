@@ -1,4 +1,5 @@
-﻿using Quartz;
+﻿using MOH.Common.IServices;
+using Quartz;
 using Quartz.Impl;
 using System;
 using System.Collections.Generic;
@@ -31,11 +32,11 @@ namespace MOH.Jobaria
                 await scheduler.Start();
 
 
+
                 //      JOBS
                 IJobDetail job = JobBuilder.Create<DupJob>()
                     .WithIdentity(new JobKey(name: "jobDup", group: "jobDupGroup"))
                     .Build();
-
 
 
                 //      TRIGGERS

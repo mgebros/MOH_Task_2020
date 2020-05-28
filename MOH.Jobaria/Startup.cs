@@ -22,7 +22,8 @@ namespace MOH.Jobaria
         public static string _cronExpression;
         public static Scheduler _scheduler;
         public static bool _isRunning;
-        public static ConnectiorDI _connDi;
+
+
 
         public Startup(IConfiguration configuration)
         {
@@ -31,26 +32,20 @@ namespace MOH.Jobaria
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
-
             services.AddDbContext<MOHContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerConnectionString"), b => b.MigrationsAssembly("MOH_Task_2020")));
             services.AddScoped<IPeopleService, PeopleService>();
+            
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            ConnectiorDI._ps = services.BuildServiceProvider().GetService<IPeopleService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -81,21 +76,9 @@ namespace MOH.Jobaria
                 if (!_isRunning)
                 {
                     _isRunning = true;
-
-                    //_connDi = new ConnectiorDI();
                     _scheduler = new Scheduler();
                     await _scheduler.RunScheduler();
                 }
-
-                //while (true)
-                //{
-                //    if (!scheduler.IsSchedulerRunning)
-                //    {
-                //        await scheduler.RunScheduler();
-                //    }
-
-                //    await Task.Delay(3600000);
-                //}
 
             });
         }

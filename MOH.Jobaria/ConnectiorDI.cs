@@ -6,20 +6,13 @@ using System.Threading.Tasks;
 
 namespace MOH.Jobaria
 {
-    public class ConnectiorDI
+    public static class ConnectiorDI
     {
-        private readonly IPeopleService _ps;
+        public static IPeopleService _ps;
 
 
 
-        public ConnectiorDI(IPeopleService ps)
-        {
-            _ps = ps;
-        }
-
-
-
-        public void CallDI()
+        public static void Call()
         {
             _ps.RemoveDuplicates();
         }
